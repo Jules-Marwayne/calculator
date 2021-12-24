@@ -1,0 +1,6 @@
+operate(string)
+    read string get first pair
+    compute pair and store value
+    get next number
+    compute stored value with next number
+    repeat step4 until last operation
