@@ -1,12 +1,25 @@
+@font-face {
+    font-family: "Poppins";
+    src: url("./Poppins-Regular.ttf");
+}
+
+:root {
+    font-size: 18px;
+    font-family: "Poppins", sans-serif;
+}
+
 * {
     box-sizing: border-box;
     text-align: center;
-    background-color: #F5F5F5;
+    background-color: white;
+}
+
+h1 {
+    margin: 5px;
 }
 
 #calculator {
-    width: 400px;
-    border: 1px solid black;
+    width: 450px;
     margin: auto;
     display: flex;
     background-color: #F5F5F5;
@@ -14,38 +27,93 @@
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 500px;
+    height: 550px;
+    transition: 0.5s ease;
     border-radius: 35px;
+    border: 2px solid rgb(54, 48, 48);
+}
+
+#calculator:hover {
+    box-shadow: 0px 6px 10px rgba(54, 48, 48, 0.6);
 }
 
 #output {
-    width: 100%;
+    width: 95%;
+    margin: auto;
     height: 80px;
-    border: 1px solid black;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px rgba(54, 48, 48, 0.7);
+    padding: 5px;
 }
 
 #log {
-    background-color: red;
+    line-height: 100%;
+    font-size: 1.5rem;
+    height: 50%;
+    text-align: left;
 }
 
 #solution {
-    background-color: green;
+    height: 50%;
+    font-size: 1.5rem;
+    line-height: 100%;
+    text-align: right;
 }
 
 #buttons {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
     justify-content: space-between;
-    align-items: space-between;
+    align-items: center;
+    background-color: #F5F5F5;
 }
 
 button {
-    width: 32%;
-    height: 40px;
-    padding: 10px 15px;
-    margin: 5px 0;
-    border-radius: 5px;
-    border: 1px solid black;
+    width: 33.333333334%;
+    padding: 20px 20px;
+    border: none;
+    transition: 0.3s ease;
+    background-color: #F5F5F5;
+    font-size: 1.1rem;
+}
+
+button:hover {
+    background-color: #AE847E;
+    color: #F5F5F5;
+}
+
+#clear,
+#delete {
+    width: 25%;
+}
+
+#clear:hover {
+    background-color: red;
+    color: #363030;
+}
+
+#delete:hover {
+    background-color: #FFBD00;
+    color: #363030;
+}
+
+[id^='op-'] {
+    width: 25%;
+}
+
+[id^='op-']:hover {
+    background-color: #AE847E;
+}
+
+#dot {
+    border-radius: 0 0 0 20px;
+}
+
+#operate {
+    border-radius: 0 0 20px 0;
+}
+
+#operate:hover {
+    background-color: #1A936F;
 }

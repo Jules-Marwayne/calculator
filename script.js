@@ -1,6 +1,7 @@
 // clear button
 document.getElementById("clear").addEventListener("click", function() {
     document.getElementById("log").textContent = "";
+    document.getElementById("solution").textContent = "";
 });
 
 // delete button
@@ -31,7 +32,7 @@ document.getElementById("dot").addEventListener("click", function() {
 // operation buttons
 let operations = document.querySelectorAll("[id^='op-']")
 for (let operation of operations) {
-    operation.addEventListener("click", function() {
+    operation.addEventListener("click", function(e) {
         let log = document.getElementById("log").textContent;
         if (log.slice(-1).match(/[\+\-\*\/]/) || log == "") {
             return;
@@ -78,7 +79,11 @@ function operate(str) {
         }
         firstValue = computePair(firstValue, nextValue, operations[i]);
     }
-    return (Number.isInteger(firstValue)) ? firstValue : firstValue.toFixed(6);
+    let computedValue = (Number.isInteger(firstValue)) ? firstValue : firstValue.toFixed(6);
+    if (isNaN(computedValue)) {
+        return "Math Error";
+    }
+    return computedValue;
 }
 
 function computePair(firstVal, secondVal, sign) {
@@ -90,3 +95,36 @@ function computePair(firstVal, secondVal, sign) {
     }
     return compute[sign](firstVal, secondVal);
 }
+
+window.addEventListener("keydown", function(e) {
+    let key = e.key;
+    if (key === "Backspace") {
+        let log = document.getElementById("log").textContent;
+        document.getElementById("log").textContent = log.slice(0, -1);
+    } else if (key === "Delete") {
+        document.getElementById("log").textContent = "";
+        document.getElementById("solution").textContent = "";
+    }
+})
+window.addEventListener("keypress", function(e) {
+    let log = document.getElementById("log").textContent;
+    let key = e.key;
+    if (key.match(/[0-9]/)) {
+        document.getElementById("log").textContent += key;
+    } else if (key === ".") {
+        let lastItem = log.split(/[\+\-\*\/]/).slice(-1);
+        if (log == "" || isNaN(lastItem) || lastItem.toString().includes(".") || lastItem.toString() == ".") {
+            return;
+        }
+        document.getElementById("log").textContent += key;
+    } else if (key.match(/[\+\-\*\/]/)) {
+        if (log.slice(-1).match(/[\+\-\*\/]/) || log == "") {
+            return;
+        }
+        document.getElementById("log").textContent += key;
+    } else if (key === "=" || key === "Enter") {
+        document.getElementById("solution").textContent = operate(log);
+    } else {
+        return;
+    }
+})
